@@ -57,6 +57,18 @@ The browser UI uses session-authenticated Django views for cart updates, checkou
 
 See [docs/erd.md](docs/erd.md).
 
+## Put the running app online
+
+GitHub stores this source code; GitHub Pages only serves static files and cannot run this Django backend. This repository includes `render.yaml` for a demo deployment on Render:
+
+1. Commit and push the project files, including `render.yaml`, to the root of your GitHub repository.
+2. Sign in to Render, choose **New → Blueprint**, connect the GitHub repository, and review the listed web service and PostgreSQL database before applying.
+3. When the deploy finishes, open the `.onrender.com` URL shown by Render.
+
+The Blueprint selects Render's free web and database plans for a demo. Free web services sleep after 15 minutes without traffic and may take a few seconds to wake. Free PostgreSQL databases expire after 30 days; do not store anything you need to keep in this demo database. Check Render's current plan details before confirming resource creation. Production use needs an appropriate persistent database plan and deployment settings.
+
+Each push to the connected GitHub branch can trigger a redeploy. Keep GitHub Pages turned off for this Django repository; its URL will continue to show repository documentation and won't run the app.
+
 ## Repository notes
 
 The project contains no real payment integration or external AI API key. Demo checkout simply creates an order. Set a unique `SECRET_KEY`, `DEBUG=False`, and production `ALLOWED_HOSTS` before deployment. The recommendation assistant currently uses transparent rules over order history and aggregate purchases, so no customer data leaves the application.
